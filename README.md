@@ -8,3 +8,6 @@
 ```shell
 curl -Ss https://raw.githubusercontent.com/just-do-halee/near-contract/main/install.sh | sh
 ```
+```shell
+make # after installation
+```
