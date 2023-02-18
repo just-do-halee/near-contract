@@ -129,3 +129,12 @@ view: checkAccount checkMethod
 clean:
 	@rm -rf ./res/*.wasm
 	@$(C) clean
+
+
+# ------------------------------------------------------
+#
+# LICENSE
+#
+# "MIT OR Apache-2.0"
+#
+# by Doha Lee(= Hwakyeom Kim) <just.do.halee@gmail.com>
