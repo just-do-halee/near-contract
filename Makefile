@@ -1,5 +1,5 @@
-accountId =
-contractId =
+accountId = 
+contractId = 
 # ------------------------------------------------------
 # 
 # set : Sets the account and contract id
@@ -28,6 +28,7 @@ contractId =
 #
 # ------------------------------------------------------
 MKPATH = $(abspath $(lastword $(MAKEFILE_LIST)))
+BUILDPATH = build
 
 C=cargo
 R=rustup
@@ -100,11 +101,12 @@ test:
 build: test
 	@$(R) target add $(CTARGET)
 	@$(CFLAG)='-C link-arg=-s' $(C) build --release --target=$(CTARGET)
-	@cp ./target/$(CTARGET)/release/*.wasm ./res/
+	@if [ ! -d "$(BUILDPATH)" ]; then mkdir $(BUILDPATH); fi
+	@cp ./target/$(CTARGET)/release/*.wasm ./$(BUILDPATH)/
 
 deploy: checkAccount test build
 	@echo "deploying ${contractId} with ${accountId} \ninitFunction = ${initFunction}\ninitArgs = ${initArgs}\ninitGas = ${initGas}\ninitDeposit = ${initDeposit}\n"
-	@$(N) deploy $(contractId) --wasmFile ./res/*.wasm \
+	@$(N) deploy $(contractId) --wasmFile ./$(BUILDPATH)/*.wasm \
 		$(if $(initFunction), --initFunction=$(initFunction)) \
 		$(if $(initArgs), --initArgs='$(initArgs)') \
 		$(if $(initGas), --initGas=$(initGas)) \
@@ -127,7 +129,7 @@ view: checkAccount checkMethod
 # ------------------------------------------------------
 
 clean:
-	@rm -rf ./res/*.wasm
+	@rm -rf ./$(BUILDPATH)/*
 	@$(C) clean
 
 

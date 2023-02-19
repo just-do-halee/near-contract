@@ -1,7 +1,13 @@
 pub use near_sdk::{
     borsh::{self, BorshDeserialize, BorshSerialize},
-    env, log, near_bindgen, require,
+    PanicOnDefault,
 };
+pub use near_sdk::{
+    collections::{self, LazyOption, LegacyTreeMap, TreeMap},
+    store::*,
+};
+pub use near_sdk::{env, log, near_bindgen, require};
+pub use near_sdk::{json_types::*, AccountId, Balance, Promise};
 
 /// Hex encoding/decoding: .encode_hex() and .decode_hex()
 pub use uint::hex::{FromHex, FromHexError, ToHex};
@@ -133,7 +139,7 @@ pub mod test_utils {
     }
     pub use vm;
 
-    /// Create a container for logs.
+    /// Create a container for logs mocks.
     ///
     /// # Example
     /// ```

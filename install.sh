@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e # if any command fails, exit the script
+
 
 git clone https://github.com/just-do-halee/near-contract
 

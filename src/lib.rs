@@ -2,18 +2,20 @@ mod cmn;
 use cmn::*;
 
 #[near_bindgen]
-#[derive(Default, BorshDeserialize, BorshSerialize)]
+#[derive(PanicOnDefault, BorshDeserialize, BorshSerialize)]
 pub struct Contract {
     // contract state
     solution: String,
 }
 
-#[near_bindgen]
 impl Contract {
     fn hash(s: String) -> String {
         hash(s, env::sha256).encode_hex::<String>()
     }
+}
 
+#[near_bindgen]
+impl Contract {
     // contract methods
     #[init]
     pub fn new(solution: String) -> Self {
