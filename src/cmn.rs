@@ -7,7 +7,9 @@ pub use near_sdk::{
     store::*,
 };
 pub use near_sdk::{env, log, near_bindgen, require};
-pub use near_sdk::{json_types::*, AccountId, Balance, Promise};
+pub use near_sdk::{
+    json_types::*, AccountId, Balance, Gas, Promise, PromiseError, PromiseOrValue, PromiseResult,
+};
 
 /// Hex encoding/decoding: .encode_hex() and .decode_hex()
 pub use uint::hex::{FromHex, FromHexError, ToHex};
